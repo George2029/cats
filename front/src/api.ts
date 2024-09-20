@@ -13,6 +13,7 @@ export const setAuthToken = (token: string) => {
 
 const getAuthToken = () => {
   const token = localStorage.getItem('x-auth-token');
+  console.log(`token: `, token);
   if (token) {
     apiClient.defaults.headers['x-auth-token'] = token;
   }
@@ -21,7 +22,8 @@ const getAuthToken = () => {
 export const fetchCats = async (): Promise<Cat[]> => {
   getAuthToken();
   const response = await apiClient.get<LikeResponse>('/likes');
-  return response.data.data;
+  console.log(`res.data:`, response.data);
+  return response.data;
 };
 
 export const addLike = async (cat_id: string) => {

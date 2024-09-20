@@ -11,9 +11,10 @@ function App() {
     const loadCats = async () => {
     try {
       const fetchedCats = await fetchCats();
-      setCats(fetchedCats);
+      !fetchedCats.length && setCats(fetchedCats);
     } catch (err) {
       console.log(`error loading cats`);
+      console.log(err);
     }
     };
       loadCats();

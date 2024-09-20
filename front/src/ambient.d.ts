@@ -3,9 +3,7 @@ interface Cat {
   created_at?: string;
 }
 
-interface LikeResponse {
-  data: Cat[];
-}
+type LikeResponse = Cat[];
 
 interface User {
   login: string;
