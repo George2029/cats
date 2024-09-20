@@ -25,6 +25,10 @@ services:
       - cat-pinterest-net
     environment:
       NODE_ENV: prod
+      DATABASE_URL: postgres://postgres:1@cat-pinterest-api-pg:5432/support_lk_db 
+      SECRET_KEY: asdf
+      PORT: 3000
+      FRONT_ORIGIN: http://cat-pinterest-front:5173
     depends_on:
       cat-pinterest-api-pg:
         condition: service_healthy

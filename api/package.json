@@ -6,6 +6,7 @@
   "private": true,
   "scripts": {
     "start:dev": "nest start --watch",
+    "build": "nest build",
     "orm:help": "typeorm-model-generator --help",
     "orm:gen": "typeorm-model-generator -e postgres -h localhost -p 5432 -d vk -u postgres -o database/models -x ",
     "cli": "typeorm --help",
