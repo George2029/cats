@@ -21,9 +21,9 @@ const getAuthToken = () => {
 
 export const fetchCats = async (): Promise<Cat[]> => {
   getAuthToken();
-  const response = await apiClient.get<LikeResponse>('/likes');
-  console.log(`res.data:`, response.data);
-  return response.data;
+  const {data: cats} = await apiClient.get<CatsResponse>('/cats');
+  console.log(`cats:`, cats);
+  return cats;
 };
 
 export const addLike = async (cat_id: string) => {

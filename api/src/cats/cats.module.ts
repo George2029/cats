@@ -9,4 +9,4 @@ import { Like } from 'src/likes/entities/like.entity';
   providers: [CatsService],
   controllers: [CatsController]
 })
-export class LikesModule {}
+export class CatsModule {}
