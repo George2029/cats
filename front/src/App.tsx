@@ -9,13 +9,13 @@ function App() {
 
   useEffect(() => {
     const loadCats = async () => {
-    try {
-      const fetchedCats = await fetchCats();
-      !fetchedCats.length && setCats(fetchedCats);
-    } catch (err) {
-      console.log(`error loading cats`);
-      console.log(err);
-    }
+      try {
+        const fetchedCats = await fetchCats();
+        !fetchedCats.length && setCats(fetchedCats);
+      } catch (err) {
+        console.log(`error loading cats`);
+        console.log(err);
+      }
     };
       loadCats();
   }, []);

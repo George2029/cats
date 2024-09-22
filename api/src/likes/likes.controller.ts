@@ -11,6 +11,7 @@ export class LikesController {
 
   @Get()
   getLikes() {
+    console.log(`getLikes`);
     return this.likesService.getLikes();
   }
 

@@ -5,5 +5,6 @@ declare namespace NodeJS {
 	  FRONT_ORIGIN?: string;
     SECRET_KEY?: string;
     DATABASE_URL?: string;
+    CAT_API_KEY?: string;
 	}
 }

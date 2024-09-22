@@ -1,4 +1,3 @@
-version: '3.7'
 services:
   proxy:
     container_name: cat-pinterest-proxy
@@ -28,7 +27,8 @@ services:
       DATABASE_URL: postgres://postgres:1@cat-pinterest-api-pg:5432/support_lk_db 
       SECRET_KEY: asdf
       PORT: 3000
-      FRONT_ORIGIN: http://cat-pinterest-front:5173
+      FRONT_ORIGIN: http://localhost:8080
+      CAT_API_KEY: live_17vW674SuIwlL5iHE5nf5ox5wKEBs1SS5PToqUzVenBs2XalY3AfwQTSvbz9dvi2
     depends_on:
       cat-pinterest-api-pg:
         condition: service_healthy
