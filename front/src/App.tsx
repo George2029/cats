@@ -20,17 +20,14 @@ function App() {
 
 
   return (
-
-    <div>
-      <h1>All Cats</h1>
-      <div>
+    <div className="mx-3 my-2 xl:mx-10 xl:my-4">
+      <div className="grid gap-5 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
         {cats.map(cat => (
-          <div key={cat.id}>
-            <img width={cat.width} height={cat.height} alt="" src={cat.url} />
+          <div key={cat.id} className="aspect-square">
+            <img className="w-full h-full" alt="cat" src={cat.url} />
           </div>
         ))}
       </div>
-
     </div>
   );
 }
