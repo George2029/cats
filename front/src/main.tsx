@@ -1,28 +1,27 @@
-import ReactDOM from 'react-dom/client'
-import ErrorPage from './error';
-import App from './App.tsx'
-import './index.css'
+import ReactDOM from "react-dom/client";
+import ErrorPage from "./error";
+import App from "./App.tsx";
+import "./index.css";
 import {
   createBrowserRouter,
   RouterProvider,
   Outlet,
   Link,
-  useLocation
+  useLocation,
 } from "react-router-dom";
-
 
 const MainLayout = () => {
   const location = useLocation();
-  
+
   return (
     <div>
-      <nav className="bg-sky-200 drop-shadow-2xl">
-        <div className="mx-3 xl:mx-10 flex">
+      <nav className="bg-nav_bg drop-shadow-2xl">
+        <div className="mx-6 xl:mx-14 flex">
           <Link
             className={`p-6 ${
               location.pathname === "/"
-                ? "bg-sky-300" 
-                : "hover:bg-sky-400" 
+                ? "text-white bg-nav_bg_selected"
+                : "text-gray-200 hover:text-white hover:bg-nav_bg_selected"
             }`}
             to="/"
           >
@@ -32,8 +31,8 @@ const MainLayout = () => {
           <Link
             className={`p-6 ${
               location.pathname === "/favourite"
-                ? "bg-sky-300" 
-                : "hover:bg-sky-400" 
+                ? "text-white bg-nav_bg_selected"
+                : "text-gray-200 hover:text-white hover:bg-nav_bg_selected"
             }`}
             to="/favourite"
           >
@@ -65,7 +64,6 @@ const router = createBrowserRouter([
   },
 ]);
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
-  <RouterProvider router={router} />
-)
-
+ReactDOM.createRoot(document.getElementById("root")!).render(
+  <RouterProvider router={router} />,
+);

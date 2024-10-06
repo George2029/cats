@@ -7,12 +7,10 @@ export class CatsService {
     try {
       let res = await fetch(url, {
         headers: {
-          'x-api-key': process.env.CAT_API_KEY
-        }
-      })
-      let json = await res.json()
-      console.log(`json:`, json);
-      return json;
+          'x-api-key': process.env.CAT_API_KEY,
+        },
+      });
+      return res.json();
     } catch (err) {
       console.log(`getCats:`, err);
       throw err;

@@ -6,7 +6,7 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  getLikes() {
+  getCats() {
     return this.catsService.getCats();
   }
 }
