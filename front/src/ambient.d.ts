@@ -6,9 +6,16 @@ interface Cat {
   height: number;
 }
 
-type CatsResponse =  Cat[];
+type CatsResponse = Cat[];
 
 interface User {
   login: string;
   password: string;
 }
+
+type Like = {
+  user_id: number;
+  cat_id: string;
+  url: string;
+  created_at: string;
+};

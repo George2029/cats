@@ -1,28 +1,30 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchCats, addLike } from "./api";
+import { fetchLikes } from "./api";
 
-function App() {
-  const [cats, setCats] = useState<Cat[]>([]);
+function Favourites() {
+  const [likes, setLikes] = useState<Like[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const loadCats = async () => {
+    const load_likes = async () => {
       try {
-        const fetchedCats: Cat[] = await fetchCats();
-        fetchedCats.length && setCats(fetchedCats);
+        const fetche_likes: Like[] | null = await fetchLikes(navigate);
+        if (fetche_likes) {
+          setLikes(fetche_likes);
+        }
       } catch (err) {
         console.log(`error loading cats`, err);
       }
     };
-    loadCats();
+    load_likes();
   }, []);
 
   return (
     <div className="mx-6 my-4 xl:mx-14 xl:my-10">
       <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5">
-        {cats.map((cat) => (
-          <div key={cat.id} className="group">
+        {likes.map((like) => (
+          <div key={like.cat_id} className="group">
             <div className="aspect-square group-hover:scale-110 transition-transform relative hover:rounded-sm hover:shadow-xl">
               <div className="absolute bottom-5 right-5 opacity-0 group-hover:opacity-100 transition-opacity">
                 <svg
@@ -32,7 +34,7 @@ function App() {
                   strokeWidth={3}
                   stroke="#ef4444"
                   className="size-12 hover:fill-red-500"
-                  onClick={()=>addLike(cat.id, cat.url, navigate)}
+                  //onClick={()=>addLike(cat.id, cat.url, navigate)}
                 >
                   <path
                     strokeLinecap="round"
@@ -44,7 +46,7 @@ function App() {
               <img
                 className="w-full h-full object-cover"
                 alt="cat"
-                src={cat.url}
+                src={like.url}
               />
             </div>
           </div>
@@ -54,4 +56,4 @@ function App() {
   );
 }
 
-export default App;
+export default Favourites;

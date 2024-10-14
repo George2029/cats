@@ -15,6 +15,21 @@ services:
     networks:
       - cat-pinterest-net
 
+  migration-runner:
+    container_name: migration-runner
+    build:
+      context: ./api/
+      dockerfile: Dockerfile.dev 
+    entrypoint: ["npm", "run", "mig"] 
+    networks:
+      - cat-pinterest-net
+    environment:
+      NODE_ENV: development
+      DATABASE_URL: postgres://postgres:1@cat-pinterest-api-pg:5432/support_lk_db
+    depends_on:
+      cat-pinterest-api-pg:
+        condition: service_healthy
+
   cat-pinterest-api:
     container_name: cat-pinterest-api
     image: cat-pinterest-api

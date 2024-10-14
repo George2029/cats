@@ -8,7 +8,7 @@ import { Repository } from 'typeorm';
 export class UsersService {
   constructor(
     @InjectRepository(User)
-    private readonly userEntity: Repository<User>
+    private readonly userEntity: Repository<User>,
   ) {}
 
   async createUser(login: string, password: string) {
@@ -16,7 +16,7 @@ export class UsersService {
     console.log(`user created:`, user);
 
     const salt = randomBytes(32);
-    const user_id_in_bytes = Buffer.from(user.id, 'utf-8');
+    const user_id_in_bytes = Buffer.from(String(user.id), 'utf-8');
     const user_id_length = Buffer.from([user_id_in_bytes.length]);
 
     const combined = Buffer.concat([salt, user_id_length, user_id_in_bytes]);
@@ -25,7 +25,12 @@ export class UsersService {
     hmac.update(combined);
     const hash = hmac.digest();
 
-    const token = Buffer.concat([salt, user_id_length, user_id_in_bytes, hash]).toString('hex');
+    const token = Buffer.concat([
+      salt,
+      user_id_length,
+      user_id_in_bytes,
+      hash,
+    ]).toString('hex');
 
     return { token, user };
   }

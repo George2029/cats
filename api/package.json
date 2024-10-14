@@ -12,7 +12,7 @@
     "cli": "typeorm --help",
     "mig": "typeorm migration:run -d typeorm/config/index.js",
     "revert": "typeorm migration:revert -d typeorm/config/index.js",
-    "generate": "typeorm migration:generate -d typeorm/config/index.js -o typeorm/migrations/$npm_config_name"
+    "generate": "typeorm migration:generate -p -d typeorm/config/index.js -o typeorm/migrations/init"
   },
   "keywords": [],
   "license": "ISC",

@@ -6,7 +6,9 @@ export class CatsController {
   constructor(private readonly catsService: CatsService) {}
 
   @Get()
-  getCats() {
-    return this.catsService.getCats();
+  async getCats() {
+    let cats = await this.catsService.getCats();
+    console.log(cats);
+    return cats;
   }
 }

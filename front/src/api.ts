@@ -10,11 +10,17 @@ const apiClient = axios.create({
 export const setAuthToken = (token: string) => {
   localStorage.setItem("x-auth-token", token);
 };
+const deleteAuthToken = () => {
+  localStorage.removeItem("x-auth-token");
+};
 
-const getAuthToken = () => {
+const getAuthToken = (): boolean => {
   const token = localStorage.getItem("x-auth-token");
   if (token) {
     apiClient.defaults.headers["x-auth-token"] = token;
+    return true;
+  } else {
+    return false;
   }
 };
 
@@ -24,9 +30,53 @@ export const fetchCats = async (): Promise<Cat[]> => {
   return cats;
 };
 
-export const addLike = async (cat_id: string) => {
-  getAuthToken();
-  await apiClient.post("/likes", { cat_id });
+export const fetchLikes = async (navigate: Function): Promise<Like[] | null> => {
+  let result = getAuthToken();
+  if (result) {
+    try {
+      let { status, data } = await apiClient.get<Like[]>("/likes");
+      console.log(`status`, status);
+      if (status !== 200) {
+        deleteAuthToken();
+        navigate("/account");
+      }
+      return data;
+    } catch (err) {
+      console.log(`fetchLikes:`, err);
+      deleteAuthToken();
+      navigate("/account");
+      return null;
+    }
+  } else {
+    return null;
+  }
+};
+
+export const addLike = async (
+  cat_id: string,
+  url: string,
+  navigate: Function,
+): Promise<boolean> => {
+  let result = getAuthToken();
+  if (result) {
+    try {
+      let { status } = await apiClient.post("/likes", { cat_id, url });
+      console.log(`status`, status);
+      if (status !== 201) {
+        deleteAuthToken();
+        navigate("/account");
+      }
+      return true;
+    } catch (err) {
+      console.log(`addLike:`, err);
+      deleteAuthToken();
+      navigate("/account");
+      return false;
+    }
+  } else {
+    navigate("/account");
+    return false;
+  }
 };
 
 export const removeLike = async (cat_id: string) => {
