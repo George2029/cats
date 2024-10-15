@@ -30,7 +30,9 @@ export const fetchCats = async (): Promise<Cat[]> => {
   return cats;
 };
 
-export const fetchLikes = async (navigate: Function): Promise<Like[] | null> => {
+export const fetchLikes = async (
+  navigate: Function,
+): Promise<Like[] | null> => {
   let result = getAuthToken();
   if (result) {
     try {
@@ -52,6 +54,27 @@ export const fetchLikes = async (navigate: Function): Promise<Like[] | null> => 
   }
 };
 
+export const deleteLike = async (
+  cat_id: string,
+  navigate: Function,
+): Promise<boolean> => {
+  let result = getAuthToken();
+  if (result) {
+    try {
+      let resp = await apiClient.delete(`/likes/${cat_id}`);
+      console.log(`resp`, resp);
+      return true;
+    } catch (err) {
+      console.log(`deleteLike:`, err);
+      deleteAuthToken();
+      navigate("/account");
+      return false;
+    }
+  } else {
+    navigate("/account");
+    return false;
+  }
+};
 export const addLike = async (
   cat_id: string,
   url: string,

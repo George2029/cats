@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchLikes } from "./api";
+import { fetchLikes, deleteLike } from "./api";
 
 function Favourites() {
   const [likes, setLikes] = useState<Like[]>([]);
@@ -33,8 +33,17 @@ function Favourites() {
                   viewBox="0 0 24 24"
                   strokeWidth={3}
                   stroke="#ef4444"
-                  className="size-12 hover:fill-red-500"
-                  //onClick={()=>addLike(cat.id, cat.url, navigate)}
+                  className="size-12 fill-red-500"
+                  onClick={async () => {
+                    await deleteLike(like.cat_id, navigate);
+                    console.log(like.cat_id);
+                    console.log(
+                      likes.filter((item) => item.cat_id !== like.cat_id),
+                    );
+                    setLikes(
+                      likes.filter((item) => item.cat_id !== like.cat_id),
+                    );
+                  }}
                 >
                   <path
                     strokeLinecap="round"

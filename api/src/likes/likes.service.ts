@@ -26,5 +26,6 @@ export class LikesService {
   async deleteLike(user_id: string, cat_id: string) {
     let { affected } = await this.likeEntity.delete({ user_id, cat_id });
     if (!affected) throw new NotFoundException(ERR_MESSAGES.like_not_found);
+    return {};
   }
 }
