@@ -37,7 +37,6 @@ export const fetchLikes = async (
   if (result) {
     try {
       let { status, data } = await apiClient.get<Like[]>("/likes");
-      console.log(`status`, status);
       if (status !== 200) {
         deleteAuthToken();
         navigate("/account");
@@ -61,8 +60,7 @@ export const deleteLike = async (
   let result = getAuthToken();
   if (result) {
     try {
-      let resp = await apiClient.delete(`/likes/${cat_id}`);
-      console.log(`resp`, resp);
+      await apiClient.delete(`/likes/${cat_id}`);
       return true;
     } catch (err) {
       console.log(`deleteLike:`, err);
@@ -84,7 +82,6 @@ export const addLike = async (
   if (result) {
     try {
       let { status } = await apiClient.post("/likes", { cat_id, url });
-      console.log(`status`, status);
       if (status !== 201) {
         deleteAuthToken();
         navigate("/account");

@@ -13,7 +13,6 @@ export class LikesService {
 
   async getLikes(user_id: string): Promise<Like[]> {
     let likes = await this.likeEntity.find({ where: { user_id } });
-    console.log(`likes:`, likes);
     return likes;
   }
 
